@@ -81,6 +81,7 @@ def plotResponse(response, freqs, title, **kwargs):
     ymax = 1e10
     ymax = 1.1 * amp.max()
     ymin = amp.min()
+    xlabel = 'Frequency [Hz]'
 
     if kwargs is not None:
         #for key, value in kwargs.iteritems():
@@ -93,9 +94,13 @@ def plotResponse(response, freqs, title, **kwargs):
                 ymin = value
             elif key == 'ymax':
                 ymax = value
+            elif key == 'xlabel':
+                xlabel = value
+            elif key == 'ylabel':
+                ylabel = value
 
 
-    dB_max = 20*np.log10(amp.max())
+    #dB_max = 20*np.log10(amp.max())
     #for i in range( len(freqs) ):
         #dB = 20*np.log10(amp[i])
         #if (dB_max - dB) >= 3:
@@ -132,6 +137,7 @@ def plotResponse(response, freqs, title, **kwargs):
     ax.set_xlim([xmin, xmax])
     ax.set_ylim([ymin, ymax])
     ax.set_ylabel('response phase [deg]')
+    ax.set_xlabel(xlabel)
     ax.plot(freqs, pha, 'g')
 #
 
@@ -156,6 +162,7 @@ def plotResponse2(response1, response2, freqs, title, **kwargs):
     ymax = 1e10
     ymax = 1.1 * amp.max()
     ymin = amp.min()
+    xlabel = 'Frequency [Hz]'
 
     if kwargs is not None:
         #for key, value in kwargs.iteritems():
@@ -168,6 +175,10 @@ def plotResponse2(response1, response2, freqs, title, **kwargs):
                 ymin = value
             elif key == 'ymax':
                 ymax = value
+            elif key == 'xlabel':
+                xlabel = value
+            elif key == 'ylabel':
+                ylabel = value
 
     rad2deg = 180./np.pi
     amp1 = np.abs(response1)
@@ -192,7 +203,7 @@ def plotResponse2(response1, response2, freqs, title, **kwargs):
     ax.set_yscale('log')
     ax.set_xlim([xmin, xmax])
     ax.set_ylim([ymin, ymax])
-    ax.set_ylabel('response mod [dB V/Pa]')
+    ax.set_ylabel('log response amp')
     ax.plot(freqs, amp1, 'g')
     ax.plot(freqs, amp2, 'r')
 
@@ -211,6 +222,7 @@ def plotResponse2(response1, response2, freqs, title, **kwargs):
     ax.set_xlim([xmin, xmax])
     ax.set_ylim([ymin, ymax])
     ax.set_ylabel('response phase [deg]')
+    ax.set_xlabel(xlabel)
     ax.plot(freqs, pha1, 'g')
     ax.plot(freqs, pha2, 'r')
 #
